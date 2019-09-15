@@ -1,6 +1,6 @@
 const mongoose = require('mongoose')
 
-const Task = mongoose.model('Task', {
+const taskSchema = new mongoose.Schema({
     description: {
         type: String,
         required: true,
@@ -9,7 +9,26 @@ const Task = mongoose.model('Task', {
     isCompleted: {
         type: Boolean,
         default: false
+    },
+    owner: {
+        type: mongoose.Schema.Types.ObjectId,
+        required: true,
+        ref: 'User'
     }
+}, {
+    timestamps: true
 })
+
+taskSchema.methods.toJSON = function() {
+    const taskObject = this.toObject()
+
+    delete taskObject._id
+    delete taskObject.owner
+    delete taskObject.__v
+
+    return taskObject
+}
+
+const Task = mongoose.model('Task', taskSchema)
 
 module.exports = Task
