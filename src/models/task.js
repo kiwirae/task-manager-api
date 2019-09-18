@@ -22,7 +22,7 @@ const taskSchema = new mongoose.Schema({
 taskSchema.methods.toJSON = function() {
     const taskObject = this.toObject()
 
-    delete taskObject._id
+    // delete taskObject._id
     delete taskObject.owner
     delete taskObject.__v
 

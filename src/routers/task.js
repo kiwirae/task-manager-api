@@ -103,7 +103,7 @@ router.patch('/tasks/:id', auth, async (req, res) => {
         res.send(task)
 
     } catch (error) {
-        res.status(500).send(error)
+        res.status(400).send(error)
     }
 
     // Task.findByIdAndUpdate(req.params.id, req.body, { new: true, runValidators: true })
@@ -134,7 +134,7 @@ router.delete('/tasks/:id', auth, async (req, res) => {
 
         res.send(task)
     } catch(error) {
-        res.status(500).send(error)
+        res.status(400).send(error)
     }
 })
 
